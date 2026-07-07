@@ -8,10 +8,22 @@ from src.training.models import create_model
 from src.identify.clip_matcher import rank_variants
 from src.identify.variants import load_catalog, variants_family
 from src.identify.summary import format_summary
+from src.detection.watch_cropper import crop_watch
+from fastapi.middleware.cors import CORSMiddleware
 
 VARIANT_CATALOG_PATH = Path ('src/identify/rolex_variants.json')
 MODEL_PATH = Path ('models/rolex_classifier_model.pt')
 app = FastAPI(title = 'Rolex Classifier')
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "vercel link", #add vercel link here in the future
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 variant_catalog = load_catalog(VARIANT_CATALOG_PATH)
 device = torch.device ('cpu')
@@ -103,5 +115,21 @@ FastAPI format to operate the project pipeline
 async def predict (file: UploadFile = File(...)): 
     contents = await file.read()
     image = decode_image (contents)
-    return predict_image (image)
+    cropped_image, crop_info = crop_watch (image)
+    if crop_info.get("reason") == "no_watch_detected":
+        return {
+            "status": "no_watch_detected",
+            "message": "No watch was detected in the image. Please upload an image that clearly shows a watch.",
+            "crop_info": crop_info,
+        }
+    result = predict_image (cropped_image)
+    result["crop_info"] = crop_info
+    return result
 
+
+@app.get("/health")
+async def health():
+    """
+    Check the health of the site
+    """
+    return {"status": "ok"}
