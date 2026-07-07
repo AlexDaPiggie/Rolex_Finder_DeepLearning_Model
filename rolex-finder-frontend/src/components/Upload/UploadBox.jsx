@@ -2,27 +2,75 @@ import "./UploadBox.css";
 import { useRef, useState } from "react";
 import WatchIcon from "../UI/WatchIcon";
 
-function UploadBox() {
+function UploadBox({ onPrediction }) {
   const [image, setImage] = useState(null);
+  const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [isScanning, setIsScanning] = useState(false);
 
   const inputRef = useRef(null);
+  const scanIdRef = useRef(0);
 
   function handleImage(event) {
     const file = event.target.files[0];
 
     if (!file) return;
 
-    setImage(URL.createObjectURL(file));
+    setImage((currentImage) => {
+      if (currentImage) URL.revokeObjectURL(currentImage);
+      return URL.createObjectURL(file);
+    });
+    setFile(file);
     setFileName(file.name);
+    scanIdRef.current += 1;
+    setIsScanning(false);
+    onPrediction(null);
   }
 
   function removeImage() {
+    if (image) URL.revokeObjectURL(image);
     setImage(null);
+    setFile(null);
     setFileName("");
+    scanIdRef.current += 1;
+    setIsScanning(false);
+    onPrediction(null);
 
     // Allows selecting the same image again
     inputRef.current.value = "";
+  }
+
+  async function findWatch() {
+    if (!file || isScanning) return;
+
+    const scanId = ++scanIdRef.current;
+    setIsScanning(true);
+    onPrediction(null);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("The image could not be scanned");
+
+      const result = await response.json();
+      if (scanId !== scanIdRef.current) return;
+      if (!result?.predicted_class || !result?.probabilities) {
+        throw new Error("The scan returned no prediction");
+      }
+
+      onPrediction(result);
+    } catch {
+      // A failed scan intentionally leaves the prediction area blank.
+      if (scanId === scanIdRef.current) onPrediction(null);
+    } finally {
+      if (scanId === scanIdRef.current) setIsScanning(false);
+    }
   }
 
   return (
@@ -93,9 +141,10 @@ function UploadBox() {
 
       <button
         className="find-btn"
-        disabled={!image}
+        disabled={!image || isScanning}
+        onClick={findWatch}
       >
-        FIND
+        {isScanning ? "SCANNING..." : "FIND"}
       </button>
     </div>
   );

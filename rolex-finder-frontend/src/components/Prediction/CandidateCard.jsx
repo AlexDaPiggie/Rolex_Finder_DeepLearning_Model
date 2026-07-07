@@ -20,7 +20,7 @@ function CandidateCard({
       <div className="score-section">
 
     <p>
-        Match Score: <strong>{score}%</strong>
+        Match Score: <strong>{score.toFixed(2)}%</strong>
     </p>
 
 </div>
