@@ -13,3 +13,4 @@ scikit-learn>=1.5
 torch>=2.3
 torchvision>=0.18
 uvicorn[standard]>=0.30
+opencv-python-headless>=4.10

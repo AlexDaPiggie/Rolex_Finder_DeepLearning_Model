@@ -10,9 +10,12 @@ from src.identify.variants import load_catalog, variants_family
 from src.identify.summary import format_summary
 from src.detection.watch_cropper import crop_watch
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 VARIANT_CATALOG_PATH = Path ('src/identify/rolex_variants.json')
 MODEL_PATH = Path ('models/rolex_classifier_model.pt')
+OUTPUT_IMAGE_DIR = Path ("output_image")
+
 app = FastAPI(title = 'Rolex Classifier')
 app.add_middleware(
     CORSMiddleware,
@@ -107,6 +110,12 @@ def predict_image (image: Image.Image):
     result['model_name'],  result['Prediction Summary'] = format_summary(result)
     return result
 
+def save_processed_image (image: Image.Image):
+    OUTPUT_IMAGE_DIR.mkdir (parents = True, exist_ok=True)
+    timestamp = datetime.now().strftime ("%Y%m%d_%H%M%S_f")[:-3]
+    output_path = OUTPUT_IMAGE_DIR / f"watch_{timestamp}.jpg"
+    image.save(output_path, format="JPEG", quality = 95)
+    return output_path
 
 '''
 FastAPI format to operate the project pipeline
@@ -123,7 +132,9 @@ async def predict (file: UploadFile = File(...)):
             "crop_info": crop_info,
         }
     result = predict_image (cropped_image)
+    processed_image_path = save_processed_image (cropped_image)
     result["crop_info"] = crop_info
+    result["processed_image_path"] = str(processed_image_path)
     return result
 
 
