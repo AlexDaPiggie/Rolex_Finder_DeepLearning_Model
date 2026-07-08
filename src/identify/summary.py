@@ -11,6 +11,6 @@ def format_summary (result: dict[str, object]):
     '''
     model_name = str(result.get ("predicted_class")).replace ('_', '-').title()
     candidates = result.get ("variant_candidates")
-    summary = f"Among the known variants, the closest match is: {candidates[0].get('display_name')}, with possible reference IDs: {format_references(candidates[0])}. The next Closest match: {candidates[1].get('display_name')}, with possible reference IDs: {format_references(candidates[1])}"
+    summary = f"Among the known variants, the closest match is: {candidates[0].get ('display_name')}, with possible reference IDs: {format_references(candidates[0])}. The next Closest match: {candidates[1].get ('display_name')}, with possible reference IDs: {format_references(candidates[1])}"
 
     return model_name, summary
