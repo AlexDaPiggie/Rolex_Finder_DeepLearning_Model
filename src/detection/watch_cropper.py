@@ -12,10 +12,20 @@ BOX_THRESHOLD = 0.30
 TEXT_THRESHOLD = 0.25
 PADDING_RATIO = 0.12
 MIN_BOX_AREA_RATIO = 0.02 
+
 BRACELET_CENTER_MASK_RATIO = 0.42
 BRACELET_MIN_EDGE_PIXELS = 120
 BRACELET_MIN_AXIS_CONFIDENCE = 1.8
 BRACELET_ALREADY_VERTICAL_DEGREES = 12.0
+
+DIAL_SEARCH_REGION_RATIO = 0.78
+DIAL_MIN_AREA_RATIO = 0.06
+DIAL_MAX_AREA_RATIO = 0.7
+DIAL_MIN_ASPECT_RATIO = 0.65
+DIAL_MAX_ASPECT_RATIO = 1.55
+DIAL_MAX_CENTER_DISTANCE_RATIO = 0.28
+DIAL_CROP_PADDING_RATIO = 0.40
+DIAL_MIN_SCORE = 0.45
 
 def expand_box (
     box: tuple [float, float, float, float] | list[float],
@@ -119,6 +129,135 @@ def estimate_axis_from_points (points: np.ndarray):
 
     return angle_degrees, confidence
 
+def center_search_box (
+    image_size: tuple[int, int],
+    ratio: float = DIAL_SEARCH_REGION_RATIO
+):
+    width, height = image_size
+    search_width = int(width * ratio)
+    search_height = int (height * ratio)
+    x1 = max(0, (width - search_width) // 2)
+    y1 = max(0, (height - search_height) // 2)
+    x2 = min(width, x1 + search_width)
+    y2 = min(height, y1 + search_height)
+    return x1, y1, x2, y2
+
+def find_dial_candidate (image: Image.Image):
+    search_x1, search_y1, search_x2, search_y2 = center_search_box(image.size)
+    search_image = image.crop ((search_x1, search_y1, search_x2, search_y2))
+    array = np.array (search_image.convert ('RGB'))
+    gray = cv2.cvtColor(array, cv2.COLOR_RGB2GRAY)
+    blurred = cv2.GaussianBlur(gray, (5,5), 0)
+    edges = cv2.Canny(blurred, 50, 150)
+    contours, _ = cv2.findContours(
+        edges,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_SIMPLE,
+    )
+
+    if not contours:
+        return None, {
+            "method": "center_biased_contour",
+            "dial_crop_used": False,
+            "reason": "no_contours_found",
+            "candidate_count": 0,
+        }
+    
+    image_width, image_height = image.size
+    image_area = float (image_width * image_height)
+    image_center_x = image_width / 2.0
+    image_center_y = image_height / 2.0
+    max_center_distance = float (np.hypot (image_center_x, image_center_y))
+    best_candidate = None
+    best_score = 0.0
+    evaluated_count = 0
+
+    for contour in contours:
+        x, y, width, height = cv2.boundingRect(contour)
+        x1 = x + search_x1
+        y1 = y + search_y1
+        x2 = x1 + width
+        y2 = y1 + width
+
+        box_area = float (width * height)
+        if box_area <= 0:
+            continue
+
+        area_ratio = box_area / image_area
+        if area_ratio < DIAL_MIN_AREA_RATIO or area_ratio > DIAL_MAX_AREA_RATIO:
+            continue
+
+        aspect_ratio = width / height if height else 0.0
+        if aspect_ratio < DIAL_MIN_ASPECT_RATIO or aspect_ratio > DIAL_MAX_ASPECT_RATIO:
+            continue
+
+        center_x = (x1 + x2) / 2.0
+        center_y = (y1 + y2) / 2.0
+        center_distance = float (np.hypot (
+            center_x - image_center_x,
+            center_y - image_center_y,
+        ))
+        center_distance_ratio = center_distance / max_center_distance if max_center_distance else 0.0
+        if center_distance_ratio > DIAL_MAX_CENTER_DISTANCE_RATIO:
+            continue
+
+        contour_area = float(cv2.contourArea(contour))
+        fill_ratio = contour_area / box_area if box_area else 0.0
+        roundness_score = 1.0 - min(1.0, abs(1.0 - aspect_ratio))
+        center_score = 1.0 - min(1.0, center_distance_ratio / DIAL_MAX_CENTER_DISTANCE_RATIO)
+        size_score = min(1.0, area_ratio / 0.20)
+        fill_score = min(1.0, fill_ratio / 0.60)
+        score = (
+            0.35 * center_score
+            + 0.30 * roundness_score
+            + 0.20 * size_score
+            + 0.15 * fill_score
+        )
+
+        evaluated_count += 1
+        if score > best_score:
+            best_score = score
+            best_candidate = {
+                "box": (x1, y1, x2, y2),
+                "score": float(score),
+                "area_ratio": float(area_ratio),
+                "aspect_ratio": float(aspect_ratio),
+                "center_distance_ratio": float(center_distance_ratio),
+            }
+
+    if best_candidate is None or best_score < DIAL_MIN_SCORE:
+        return None, {
+            "method": "center_biased_contour",
+            "dial_crop_used": False,
+            "reason": "no_confident_dial_candidate",
+            "candidate_count": evaluated_count,
+        }
+
+    return best_candidate, {
+        "method": "center_biased_contour",
+        "dial_crop_used": True,
+        "reason": "dial_candidate_found",
+        "box": list(best_candidate["box"]),
+        "score": best_candidate["score"],
+        "jarea_ratio": best_candidate["area_ratio"],
+        "aspect_ratio": best_candidate["aspect_ratio"],
+        "center_distance_ratio": best_candidate["center_distance_ratio"],
+    }
+
+def crop_dial_region(image: Image.Image):
+    candidate, info = find_dial_candidate(image)
+    if candidate is None:
+        return image, info
+
+    padded_box = expand_box(
+        candidate["box"],
+        image.size,
+        padding_ratio=DIAL_CROP_PADDING_RATIO,
+    )
+    cropped = image.crop(padded_box)
+    info["box"] = list(padded_box)
+    return cropped, info
+
 def align_watch_crop(image: Image.Image):
     points, _ = bracelet_edge_points(image)
     bracelet_pixel_count = int(len(points))
@@ -136,10 +275,8 @@ def align_watch_crop(image: Image.Image):
 
     # PCA angle is measured from the horizontal x-axis. A vertical bracelet has
     # an angle near +/-90 degrees, so rotate by the difference from vertical.
-    if axis_angle_degrees >= 0:
-        rotation_degrees = -90.0 - axis_angle_degrees
-    else:
-        rotation_degrees = 90.0 - axis_angle_degrees
+
+    rotation_degrees = 90 - axis_angle_degrees
 
     if axis_confidence < BRACELET_MIN_AXIS_CONFIDENCE:
         return image, {
@@ -225,6 +362,8 @@ def crop_watch (image: Image.Image):
         return cropped_image, crop_info
     
     aligned_image, alignment_info = align_watch_crop(cropped_image)
+    dial_image, dial_info = crop_dial_region (aligned_image)
     crop_info["alignment"] = alignment_info
+    crop_info["dial_crop"] = dial_info
 
-    return aligned_image, crop_info,
+    return dial_image, crop_info,

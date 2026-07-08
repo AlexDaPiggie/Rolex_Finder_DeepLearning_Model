@@ -112,6 +112,10 @@ def predict_image (image: Image.Image):
 
 def save_processed_image (image: Image.Image):
     OUTPUT_IMAGE_DIR.mkdir (parents = True, exist_ok=True)
+    for existing_file in OUTPUT_IMAGE_DIR.iterdir():
+        if existing_file.is_file():
+            existing_file.unlink()
+            
     timestamp = datetime.now().strftime ("%Y%m%d_%H%M%S_f")[:-3]
     output_path = OUTPUT_IMAGE_DIR / f"watch_{timestamp}.jpg"
     image.save(output_path, format="JPEG", quality = 95)
