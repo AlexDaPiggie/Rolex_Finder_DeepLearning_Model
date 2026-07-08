@@ -157,19 +157,19 @@ async def predict (file: UploadFile = File(...)):
                 "id": "None",
                 "display_name": "None",
                 "score": 0.0,
-                "reference_examples": ["None"]
+                "reference_examples": None
             },
             {
                 "id": "None",
                 "display_name": "None",
                 "score": 0.0,
-                "reference_examples": ["None"]
+                "reference_examples": None
             },
             {
                 "id": "None",
                 "display_name": "None",
                 "score": 0.0,
-                "reference_examples": ["None"]
+                "reference_examples": None
             },
         ]
 
