@@ -130,11 +130,57 @@ async def predict (file: UploadFile = File(...)):
     image = decode_image (contents)
     cropped_image, crop_info = crop_watch (image)
     if crop_info.get("reason") == "no_watch_detected":
-        return {
-            "status": "no_watch_detected",
-            "message": "No watch was detected in the image. Please upload an image that clearly shows a watch.",
-            "crop_info": crop_info,
+        result = dict()
+        predicted_class = "No Watch Detected"
+        confidence = 0.0
+        probabilities = {
+            "cellini": 0.0,
+            "daytona": 0.0,
+            "explorer": 0.0,
+            "yacht_master": 0.0,
+            "submariner": 0.0,
+            "president": 0.0,
+            "airking": 0.0,
+            "oyster_perpetual": 0.0,
+            "milgauss": 0.0,
+            "oysterquartz": 0.0,
+            "date": 0.0,
+            "sea_dweller": 0.0,
+            "turn_o_graph": 0.0,
+            "gmt_master": 0.0,
+            "datejust": 0.0,
         }
+        
+        variant_note = "No watch was detected in the image. Please upload an image that clearly shows a watch"
+        variant_candidates = [
+            {
+                "id": "None",
+                "display_name": "None",
+                "score": 0.0,
+                "reference_examples": ["None"]
+            },
+            {
+                "id": "None",
+                "display_name": "None",
+                "score": 0.0,
+                "reference_examples": ["None"]
+            },
+            {
+                "id": "None",
+                "display_name": "None",
+                "score": 0.0,
+                "reference_examples": ["None"]
+            },
+        ]
+
+        result["predicted_class"] = predicted_class
+        result["confidence"] = confidence
+        result["probabilities"] = probabilities
+        result["variant_note"] = variant_note
+        result["variant_candidates"] = variant_candidates
+
+        return result
+    
     result = predict_image (cropped_image)
     processed_image_path = save_processed_image (cropped_image)
     result["crop_info"] = crop_info
