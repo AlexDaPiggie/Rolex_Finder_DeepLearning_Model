@@ -27,10 +27,16 @@ function CandidateCard({
 
       <div className="references">
 
-        {references.map((ref) => (
-          <span key={ref}>
+        {references.map((ref, index) => (
+          <a
+            key={`${ref}-${index}`}
+            href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(`${model} ${ref}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`Search Google for ${model} ${ref}`}
+          >
             {ref}
-          </span>
+          </a>
         ))}
 
       </div>
