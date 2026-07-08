@@ -101,13 +101,13 @@
             "id": "datejust_fluted",
             "display_name": "Rolex Datejust Fluted Bezel",
             "reference_examples": ["126234", "126334", "126233", "16234", "1601"],
-            "clip_text": "Rolex Datejust, shiny ridged fluted bezel with many vertical grooves and faceted cuts around the dial, no gem or diamond, no mother-of-pearl, date window with cyclops magnifier at 3 o'clock, Jubilee or Oyster bracelet, baguette diamond or baton hour markers"
+            "clip_text": "Rolex Datejust Fluted, sharp ridged bezel, faceted polished cuts around the dial, scalloped tooth-like metal edge reflecting light, no gem or diamond, no mother-of-pearl, date window with cyclops magnifier at 3 o'clock, Jubilee or Oyster bracelet, baton or baguette diamond hour markers"
         },
         {
             "id": "datejust_smooth",
             "display_name": "Rolex Datejust Smooth Bezel",
             "reference_examples": ["126200", "126300", "116200", "116300", "1600"],
-            "clip_text": "Rolex Datejust with completely plain smooth polished bezel, flat mirror-like metal ring around the dial, no vertical grooves, metallic sunburst dial such as blue black silver cream or white, date window with cyclops magnifier at 3 o'clock, Oyster or Jubilee bracelet, baguette diamond or wide baton hour markers"
+            "clip_text": "Rolex Datejust Smooth, plain polished flat bezel, metallic sunburst dial such as blue black silver cream or white, date window with cyclops magnifier at 3 o'clock, Oyster or Jubilee bracelet, baguette diamond or wide baton hour markers"
         },
         {
             "id": "datejust_wimbledon",
@@ -167,6 +167,12 @@
             "clip_text": "Rolex Daytona Ice Blue, pale turquoise ice blue dial chronograph, light blue or mint main dial, matching light tiffany blue subdials, black ceramic tachymeter bezel, black rubber Oysterflex strap or platinum Oyster bracelet, steel  metal case"
         },
         {
+            "id": "daytona_two_tone",
+            "display_name": "Rolex Daytona Two Tone",
+            "reference_examples": ["116503", "126503"],
+            "clip_text": "Rolex Daytona Two Tone, two-tone gold and steel Oyster bracelet, shiny gold tachymeter bezel, three subdials with gold rings, gold baton hour markers, screw-down pushers, no green shade, no rainbown gemstones"
+        },
+        {
             "id": "daytona_rainbow",
             "display_name": "Rolex Daytona Rainbow",
             "reference_examples": ["116595RBOW", "116598RBOW",
@@ -177,7 +183,7 @@
             "id": "daytona_oysterflex_gold",
             "display_name": "Rolex Daytona Oysterflex Gold",
             "reference_examples": ["116515LN", "116518LN", "116519LN", "126515LN", "126518LN", "126519LN"],
-            "clip_text": "Rolex Daytona Oysterflex Gold, rose gold or yellow gold Daytona chronograph on black rubber Oysterflex strap, warm gold case, black ceramic tachymeter bezel, black champagne white or dark dial, three contrasting subdials"
+            "clip_text": "Rolex Daytona Oysterflex Gold, rose gold or yellow gold case, black rubber strap, warm gold case, black ceramic tachymeter bezel, black champagne white or dark dial, three contrasting subdials"
         },
         {
             "id": "daytona_paul_newman_vintage",
@@ -465,9 +471,14 @@
         {
             "id": "submariner_bluesy",
             "display_name": "Rolex Submariner Bluesy",
-            "reference_examples": ["16613LB", "116613LB",
-            "126613LB"],
+            "reference_examples": ["16613LB", "116613LB", "126613LB"],
             "clip_text": "Rolex Submariner Bluesy, blue dial and bezel, two-tone steel and yellow gold case and bracelet, yellow gold crown, yellow gold bezel markings, warm gold accents around hour markers, date cyclops"
+        },
+        {
+            "id": "submariner_two_tone",
+            "display_name": "Rolex Submariner Two-Tone",
+            "reference_examples": ["16613LN", "116613LN", "126613LN"],
+            "clip_text": "Rolex Submariner Two Tone, black dial and bezel, two-tone steel and yellow gold case and bracelet, yellow gold crown, yellow gold bezel markings, warm gold accents around hour markers, date cyclops"
         },
         {
             "id": "submariner_smurf",
@@ -563,7 +574,7 @@
             "id": "yacht_master_everose_metal",
             "display_name": "Rolex Yacht-Master Everose Gold Chocolate / Black",
             "reference_examples": ["126621", "116621", "16628", "16623"],
-            "clip_text": "Rolex Yacht-Master steel and Everose two-tone bracelet ma, chocolate brown sunburst or black dial, rose gold bezel, rose gold crown, rose gold accents"
+            "clip_text": "Rolex Yacht-Master steel and Everose two-tone bracelet, chocolate brown sunburst or black dial, rose gold bezel, rose gold crown, rose gold accents"
         },
         {
             "id": "yacht_master_titanium",
