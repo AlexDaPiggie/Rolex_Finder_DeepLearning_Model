@@ -23,9 +23,9 @@ function ProbabilityTable({ probabilities }) {
 
           <tbody>
 
-            {probabilities.map((item) => (
+            {probabilities.map((item, index) => (
 
-              <tr key={item.name}>
+              <tr key={item.name} className={index === 0 ? "top-probability" : undefined}>
 
                 <td>{item.name}</td>
 

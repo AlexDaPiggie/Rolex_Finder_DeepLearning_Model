@@ -1,5 +1,5 @@
 import "./UploadBox.css";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import WatchIcon from "../UI/WatchIcon";
 
 function UploadBox({ onPrediction }) {
@@ -11,20 +11,37 @@ function UploadBox({ onPrediction }) {
   const inputRef = useRef(null);
   const scanIdRef = useRef(0);
 
-  function handleImage(event) {
-    const file = event.target.files[0];
-
-    if (!file) return;
-
+  const selectImage = useCallback((selectedFile) => {
     setImage((currentImage) => {
       if (currentImage) URL.revokeObjectURL(currentImage);
-      return URL.createObjectURL(file);
+      return URL.createObjectURL(selectedFile);
     });
-    setFile(file);
-    setFileName(file.name);
+    setFile(selectedFile);
+    setFileName(selectedFile.name || "Pasted image");
     scanIdRef.current += 1;
     setIsScanning(false);
     onPrediction(null);
+  }, [onPrediction]);
+
+  useEffect(() => {
+    function handlePaste(event) {
+      const pastedImage = Array.from(event.clipboardData?.items ?? [])
+        .find((item) => item.type.startsWith("image/"))
+        ?.getAsFile();
+
+      if (!pastedImage) return;
+
+      event.preventDefault();
+      selectImage(pastedImage);
+    }
+
+    document.addEventListener("paste", handlePaste);
+    return () => document.removeEventListener("paste", handlePaste);
+  }, [selectImage]);
+
+  function handleImage(event) {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) selectImage(selectedFile);
   }
 
   function removeImage() {
@@ -91,7 +108,7 @@ function UploadBox({ onPrediction }) {
           <>
             <WatchIcon />
 
-            <p>Paste image here</p>
+            <p>Ctrl + V to paste image</p>
 
             <span>or</span>
 

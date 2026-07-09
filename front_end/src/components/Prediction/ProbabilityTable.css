@@ -78,3 +78,10 @@
 
     background:white;
 }
+
+.probability-table .top-probability td {
+
+    font-weight:700;
+
+    color:#032C22;
+}

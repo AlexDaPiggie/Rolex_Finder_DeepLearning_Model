@@ -105,7 +105,7 @@
     flex-wrap:wrap;
 }
 
-.references span{
+.references a{
 
     border:1px solid #D7D7D7;
 
@@ -118,4 +118,18 @@
     color:#666;
 
     background:white;
+
+    text-decoration:none;
+
+    transition:.2s;
+}
+
+.references a:hover,
+.references a:focus-visible{
+
+    border-color:#0B3A2D;
+
+    color:#0B3A2D;
+
+    background:#F2F6F4;
 }
