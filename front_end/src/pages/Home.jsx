@@ -2,6 +2,7 @@ import "./Home.css";
 import { useState } from "react";
 import UploadBox from "../components/Upload/UploadBox.jsx";
 import PredictionPanel from "../components/Prediction/PredictionPanel.jsx";
+import TutorialPanel from "../components/Tutorial/TutorialPanel.jsx";
 
 function Home() {
   const [prediction, setPrediction] = useState(null);
@@ -16,7 +17,11 @@ function Home() {
       </aside>
 
       <section className="prediction-panel">
-        {prediction && <PredictionPanel prediction={prediction} />}
+        {prediction ? (
+          <PredictionPanel prediction={prediction} />
+        ) : (
+          <TutorialPanel />
+        )}
       </section>
 
     </main>

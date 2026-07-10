@@ -2,6 +2,8 @@ import "./UploadBox.css";
 import { useCallback, useEffect, useRef, useState } from "react";
 import WatchIcon from "../UI/WatchIcon";
 
+const PREDICT_URL = "https://alexdapiggie--rolex-watch-recognizer-rolexwatchapi-web.modal.run/predict";
+
 function UploadBox({ onPrediction }) {
   const [image, setImage] = useState(null);
   const [file, setFile] = useState(null);
@@ -68,7 +70,7 @@ function UploadBox({ onPrediction }) {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/predict", {
+      const response = await fetch(PREDICT_URL, {
         method: "POST",
         body: formData,
       });
@@ -108,7 +110,7 @@ function UploadBox({ onPrediction }) {
           <>
             <WatchIcon />
 
-            <p>Ctrl + V to paste image</p>
+            <p>Paste image here</p>
 
             <span>or</span>
 
