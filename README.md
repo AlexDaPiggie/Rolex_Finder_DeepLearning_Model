@@ -1,15 +1,17 @@
-# Rolex Models Recognition
+# Rolex Finder
+## Acknowledgement
+Special thanks to my friend Huy Phan, a.k.a. Hertzy, for bringing the design of this project to life. Hertzy implemented the entire front end and crafted the visual effects that shape the user experience.
 
-describe how data are scaped from swiss watch expo 
-rememeber to: 
-- mention how data was scraped: img tag and next tag
-- mention processed logics
-- mention duplicate logic
-- mention how data was split into raw-incoming, processed, manifest, duplicate
+## Authors
+| **Alex Dapiggie** | **Huy Phan (Hertzy)** |
+|---|---|
+| **Machine Learning / Backend** | **Frontend / UI Design** |
+| Built the Rolex classification model, recognition pipeline, backend API, model integration, and Modal deployment setup. | Brought the project design to
+life by implementing the frontend, UI layout, interactions, styling, and visual effects. |
+| GitHub: [@your-github](https://github.com/your-github)<br>LinkedIn: [Alex Dapiggie](https://linkedin.com/in/your-linkedin) | GitHub: [@huy-github]
+(https://github.com/huy-github)<br>LinkedIn: [Huy Phan](https://linkedin.com/in/huy-linkedin) |
 
 
-describe how data was augmented to improve the data quality
-"Explain how preprocessing was put inside train so that we don't have to deal with working too much with "
-- random resize crop
-- random rotation
-- random perspective`
+## Frontend
+
+## Backend
