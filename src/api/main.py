@@ -7,7 +7,7 @@ from src.training.dataset import build_transforms
 from src.training.models import create_model
 from src.identify.clip_matcher import rank_variants
 from src.identify.variants import load_catalog, variants_family
-from src.identify.summary import format_summary
+from src.identify.summary import format_model_name
 from src.detection.watch_cropper import crop_watch
 from src.inference.device import resolve_device
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,7 +22,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://rolex-reg.vercel.app", #add vercel link here in the future
+        "https://rolex-finder.vercel.app", #add vercel link here in the future
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -108,7 +108,7 @@ def predict_image (image: Image.Image):
 
     variants = variants_family(variant_catalog, predicted_class)
     result.update (rank_variants(image, variants))
-    result['model_name'],  result['Prediction Summary'] = format_summary(result)
+    result['model_name'] = format_model_name(result)
     return result
 
 def save_processed_image (image: Image.Image):
