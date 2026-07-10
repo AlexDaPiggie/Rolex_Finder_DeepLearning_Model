@@ -165,6 +165,11 @@ function UploadBox({ onPrediction }) {
       >
         {isScanning ? "SCANNING..." : "FIND"}
       </button>
+      {isScanning && (
+        <p className = "scan-note">
+          Note: First-time running may take up to 40s
+        </p>
+      )}
     </div>
   );
 }

@@ -283,6 +283,14 @@
     transform: none;
 }
 
+.scan-note {
+    margin-top: 14px;
+    color: #ffffff;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.4;
+}
+
 @media (max-width: 900px) {
     .upload-box {
         max-width: 720px;
