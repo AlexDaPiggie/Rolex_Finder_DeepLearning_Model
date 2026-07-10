@@ -110,7 +110,7 @@ function UploadBox({ onPrediction }) {
           <>
             <WatchIcon />
 
-            <p>Ctrl + V to Paste Image</p>
+            <p>Ctrl + V to Paste image</p>
 
             <span>or</span>
 

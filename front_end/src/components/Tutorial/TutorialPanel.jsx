@@ -51,7 +51,7 @@ function TutorialPanel() {
         <p className="eyebrow">Quick start</p>
         <h2>Find the closest Rolex model in seconds.</h2>
         <p>
-          Drop a watch photo. Let the crown tell its story.
+          Need a live preview? Hover onto the tutorial cards
         </p>
       </div>
 
