@@ -6,6 +6,11 @@ function CandidateCard({
   score,
   references
 }) {
+  const buildImageSearchUrl = (ref) => {
+    const query = encodeURIComponent(`${model} ${ref}`);
+    return `https://www.google.com/search?tbm=isch&q=${query}`;
+  };
+
   return (
     <div className="candidate-card">
 
@@ -30,10 +35,10 @@ function CandidateCard({
         {references.map((ref, index) => (
           <a
             key={`${ref}-${index}`}
-            href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(`${model} ${ref}`)}`}
+            href={buildImageSearchUrl(ref)}
             target="_blank"
             rel="noopener noreferrer"
-            title={`Search Google for ${model} ${ref}`}
+            title={`Search Google Images for ${model} ${ref}`}
           >
             {ref}
           </a>
