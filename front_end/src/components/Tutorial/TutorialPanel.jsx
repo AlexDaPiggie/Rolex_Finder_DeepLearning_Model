@@ -36,11 +36,11 @@ const helperNotes = [
   },
   {
     title: "Accuracy note",
-    text: "Predictions are closest-match estimates, not guaranteed Rolex reference identifications.",
+    text: "Predictions are closest estimates, not guaranteed Rolex model.",
   },
   {
     title: "If it looks wrong",
-    text: "Try a clearer image, then compare the variant IDs with Google Images for visual confirmation.",
+    text: "Try a clearer image, then check with Google Images for visual confirmation",
   },
 ];
 
