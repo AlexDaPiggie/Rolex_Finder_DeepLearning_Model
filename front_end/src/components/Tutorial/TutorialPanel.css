@@ -180,12 +180,13 @@
 
     margin-top: 2px;
 
-    transition: margin-top .22s ease;
+    transition: transform .22s ease;
+    transform: translateY(0);
 }
 
 .tutorial-grid:has(.tutorial-card:hover) + .tutorial-notes,
 .tutorial-grid:has(.tutorial-card:focus-within) + .tutorial-notes {
-    margin-top: 118px;
+    transform: translateY(118px);
 }
 
 .tutorial-note {
@@ -268,7 +269,7 @@
 
     .tutorial-grid:has(.tutorial-card:hover) + .tutorial-notes,
     .tutorial-grid:has(.tutorial-card:focus-within) + .tutorial-notes {
-        margin-top: 2px;
+        transform: translateY(0);
     }
 
     .tutorial-grid:has(.tutorial-card:hover) .tutorial-card:not(:hover),
