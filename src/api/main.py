@@ -9,6 +9,7 @@ from src.identify.clip_matcher import rank_variants
 from src.identify.variants import load_catalog, variants_family
 from src.identify.summary import format_summary
 from src.detection.watch_cropper import crop_watch
+from src.inference.device import resolve_device
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import datetime
 
@@ -29,7 +30,7 @@ app.add_middleware(
 )
 
 variant_catalog = load_catalog(VARIANT_CATALOG_PATH)
-device = torch.device ('cpu')
+device = resolve_device()
 model = None
 class_names = []
 

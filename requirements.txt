@@ -14,3 +14,4 @@ torch>=2.3
 torchvision>=0.18
 uvicorn[standard]>=0.30
 opencv-python-headless>=4.10
+modal >=1.1,<2
