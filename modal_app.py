@@ -68,9 +68,9 @@ image = (
     gpu = "L4",
     min_containers = 0,
     max_containers = 1,
-    scaledown_window = 60,
-    timeout = 60,
-    startup_timeout = 60,
+    scaledown_window = 180,
+    timeout = 180,
+    startup_timeout = 180,
     secrets = [hf_secret],
 )
 
