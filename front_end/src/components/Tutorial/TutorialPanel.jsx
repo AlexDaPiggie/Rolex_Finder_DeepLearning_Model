@@ -84,13 +84,12 @@ function TutorialPanel() {
       </div>
 
       <p className="credits">
-        Made by{" "}
-        <a href="https://github.com/hertzy-da-poet" target="_blank" rel="noopener noreferrer">
-          Hertzy
-        </a>{" "}
-        and{" "}
-        <a href="https://github.com/AlexDaPiggie" target="_blank" rel="noopener noreferrer">
-          AlexDaPiggie
+        <a
+          href="https://github.com/AlexDaPiggie/Rolex_Models_Recognition"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          About this project
         </a>
       </p>
     </div>
