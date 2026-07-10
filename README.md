@@ -1,4 +1,4 @@
-# [Rolex Finder(Click to see the website)](https://rolex-reg.vercel.app)
+# [Rolex Finder(Click to see the website)](https://rolex-finder.vercel.app)
 ## Acknowledgement
 Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poetgithub.io/Hugo-Portfolio/), for bringing the design of this project to life. Hertzy implemented the entire front end and crafted the visual effects that shape the user experience.
 
