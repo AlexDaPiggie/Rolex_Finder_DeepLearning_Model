@@ -3,6 +3,7 @@ from functools import lru_cache
 import torch
 from PIL import Image
 from transformers import AutoModelForZeroShotObjectDetection, AutoProcessor
+from src.inference.device import resolve_device
 import cv2
 import numpy as np
 
@@ -314,25 +315,32 @@ def align_watch_crop(image: Image.Image):
 
 @lru_cache(maxsize = 1)
 def get_detector ():
+    device = resolve_device()
     processor = AutoProcessor.from_pretrained(MODEL_ID)
     model = AutoModelForZeroShotObjectDetection.from_pretrained (MODEL_ID)
+    model = model.to(device)
     model.eval()
     return processor, model
 
 def detect_watch (image: Image.Image): 
     processor, detector = get_detector()
+    device = resolve_device()
     inputs = processor (
         images = image,
         text = WATCH_PROMPT,
         return_tensors = 'pt',
     )
+    inputs = {
+        name: tensor.to(device)
+        for name, tensor in inputs.items()
+    }
 
     with torch.no_grad(): 
         outputs = detector(**inputs)
 
     return processor.post_process_grounded_object_detection(
         outputs, 
-        inputs.input_ids,
+        inputs["input_ids"],
         threshold = BOX_THRESHOLD,
         text_threshold = TEXT_THRESHOLD,
         target_sizes = [image.size[::-1]],
