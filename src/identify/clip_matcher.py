@@ -1,5 +1,6 @@
 from PIL import Image
 from transformers import pipeline
+from src.inference.device import resolve_device
 import os
 
 '''
@@ -15,10 +16,12 @@ def get_detector():
     '''
     global _detector
     if _detector is None: 
+        device = resolve_device()
         _detector = pipeline (
             task = 'zero-shot-image-classification',
             model = MODEL_NAME,
             token = os.getenv("HF_TOKEN"),
+            device = 0 if device.type == "cuda" else -1,
         )
     return _detector
 
