@@ -5,3 +5,4 @@ docs
 *.png
 *.webp
 *.pyc
+tests
