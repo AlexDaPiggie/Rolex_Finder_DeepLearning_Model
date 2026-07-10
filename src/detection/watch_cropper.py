@@ -338,7 +338,7 @@ def detect_watch (image: Image.Image):
     with torch.no_grad(): 
         outputs = detector(**inputs)
 
-    return processor.post_process_jgrounded_object_detection(
+    return processor.post_process_grounded_object_detection(
         outputs, 
         inputs["input_ids"],
         threshold = BOX_THRESHOLD,

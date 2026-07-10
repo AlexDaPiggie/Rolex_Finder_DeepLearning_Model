@@ -22,7 +22,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://rolex-reg.vercel.app/", #add vercel link here in the future
+        "vercel link", #add vercel link here in the future
     ],
     allow_credentials=True,
     allow_methods=["*"],
