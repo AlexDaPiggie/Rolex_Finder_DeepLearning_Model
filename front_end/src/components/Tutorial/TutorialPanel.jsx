@@ -40,7 +40,7 @@ const helperNotes = [
   },
   {
     title: "If it looks wrong",
-    text: "Try a clearer image, then check with Google Images for visual confirmation",
+    text: "Try a clearer image, then check with Google Images for visual confirmation.",
   },
 ];
 
