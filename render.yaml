@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: rolex-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: HF_TOKEN
+        sync: false
