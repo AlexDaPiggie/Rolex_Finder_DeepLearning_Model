@@ -36,7 +36,7 @@ class_names = []
 
 def load_model(): 
     '''
-    This functino is simply to load DL model to reuse it in the future
+    This function is simply to load DL model to reuse it in the future
     '''
     global model, class_names
     if not MODEL_PATH.exists(): 
