@@ -6,7 +6,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 | **Phong Nguyen (Alex)** | **Huy Phan (Hertzy)** |
 |---|---|
 | **Machine Learning / Backend** | **Frontend / UI-UX Design** |
-| Built the Rolex classification model, recognition pipeline, backend API, model integration, and Modal deployment setup. | Brought the project design to life by implementing the frontend, UI layout, interactions, styling, and visual effects. |
+| Built the Rolex classification model, recognition pipeline, backend API, model integration, and Modal deployment setup. | Brought the project design to life by implementing the frontend, UI layout, interactions, styling, visual effects, and frontend deployment on Vercel. |
 | GitHub: [@AlexDaPiggie](https://github.com/AlexDaPiggie)<br>LinkedIn: [Hoai Phong Nguyen](https://www.linkedin.com/in/hoai-phong-nguyen-9367a4384/?isSelfProfile=true) | GitHub: [@hertzy-da-poet](https://github.com/hertzy-da-poet)<br>LinkedIn: [Huy Phan](https://linkedin.com/in/huy-linkedin) |
 
 
