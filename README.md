@@ -12,7 +12,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 
 We are writing the doc for backend and frontend logic
 ## Frontend
-## Key Features
+### Key Features
 
 -   **Intuitive Image Upload:** Supports pasting from the clipboard (Ctrl+V), browsing local files, and drag-and-drop functionality.
 -   **AI-Powered Model Prediction:** Displays the most likely Rolex model along with a confidence percentage.
@@ -22,14 +22,14 @@ We are writing the doc for backend and frontend logic
 -   **Responsive Design:** Features a clean, two-panel layout that adapts seamlessly to both desktop and mobile devices.
 -   **Built-in Tutorial:** An interactive guide on the homepage helps first-time users get started quickly.
 
-## Tech Stack
+### Tech Stack
 
 -   **Frontend:** React, Vite
 -   **Libraries:** `react-dropzone` for file handling.
 -   **Styling:** Custom CSS with a modern, responsive design.
 -   **API:** The frontend communicates with a computer vision API hosted on [Modal](https://modal.run/) to perform the model recognition.
 
-## How It Works
+### How It Works
 
 1.  The user visits the web application, which presents an image upload interface and a tutorial panel.
 2.  An image of a Rolex watch is provided by pasting it, browsing local files, or dragging it into the drop zone.
@@ -63,7 +63,7 @@ To run this project locally, follow these steps:
 
 5.  Open your browser and navigate to `http://localhost:5173` (or the port specified by Vite). The development server is configured to proxy API requests to the live backend, so no additional setup is required.
 
-## Project Structure
+### Project Structure
 
 The project is organized to separate concerns, promoting maintainability and scalability.
 
