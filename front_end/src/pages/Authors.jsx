@@ -136,7 +136,7 @@ function Authors() {
             </svg>
           </span>
           <p>
-            Wanna know more about how we built the Deep Learning model and Website?
+            Wanna know more about how we built the Deep Learning model and Websitez?
             Visit our{" "}
             <a
               href="https://github.com/AlexDaPiggie/Rolex_Models_Recognition"
