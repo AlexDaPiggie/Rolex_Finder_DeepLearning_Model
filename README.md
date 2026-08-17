@@ -19,6 +19,16 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 
 
 # Key Features
+## Frontend
+-   **Intuitive Image Upload:** Supports pasting from the clipboard (Ctrl+V), browsing local files, and drag-and-drop functionality.
+-   **AI-Powered Model Prediction:** Displays the most likely Rolex model along with a confidence percentage.
+-   **Variant Candidate Analysis:** Shows a list of the closest known model variants, each with a match score and reference IDs.
+-   **Quick Reference Search:** Provides one-click links to Google Images for each reference ID to aid in visual comparison and confirmation.
+-   **Detailed Probability Breakdown:** Presents a table with the model's confidence scores across various Rolex families (e.g., Cellini, Daytona, Submariner).
+-   **Responsive Design:** Features a clean, two-panel layout that adapts seamlessly to both desktop and mobile devices.
+-   **Built-in Tutorial:** An interactive guide on the homepage helps first-time users get started quickly.
+
+## Backend
 - **Open-Vocubulary Object Detection**: Locates the watch in user's upload photos using Grounding DINO (Zero-shot object detection model). No mannual cropping needed.
 - **PCA-Based Rotation Alignment**: Extracts the edge of bracelet using Canny edge detection and rotates the watch to 90 deg vertical using PCA (Principal Component Analysis).
 - **Contour Dial Isolation**: Filters the 78% center (78% of the width & height), scores contour roundess, aspect & fill ratio, and center distance to crop the dial face.
@@ -43,7 +53,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 ## Tech Stack
 | Layer | Technologies |
 |:---|:---|
-| **Computer Vision & ML** | PyTorch, Torchvision, Grounding DINO (`IDEA-Research/grounding-dino-base`), OpenAI CLIP (`openai/clip-vit-large-patch14`), EfficientNet-B0, OpenCV, Pillow, NumPy |
+| **Computer Vision & Deep Learning** | PyTorch, Torchvision, Grounding DINO (`IDEA-Research/grounding-dino-base`), OpenAI CLIP (`openai/clip-vit-large-patch14`), EfficientNet-B0, OpenCV, Pillow, NumPy |
 | **Backend API** | FastAPI, Uvicorn, Python 3.11 |
 | **Cloud & Deployment** | Modal (Serverless NVIDIA L4 GPU, build-time cache pre-baking), Docker, Vercel |
 | **Frontend** | React, Vite, `react-dropzone`, Custom CSS |
@@ -59,7 +69,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 
 ```bash
 # Clone repository
-git clone https://github.com/hertzy-da-poet/rolex_models_recognition.git
+git clone https://github.com/AlexDaPiggie/Rolex_Finder_DeepLearning_Model.git
 cd rolex_models_recognition
 
 # Create virtual environment
