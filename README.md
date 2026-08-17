@@ -10,7 +10,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 | **Phong Nguyen (Alex)** | **Huy Phan (Hertzy)** |
 |---|---|
 | **Deep Learning & Backend** | **Web Developing / UI-UX Design** |
-| Built the Rolex classification model, web-scraping pipeline, recognition pipeline, backend API, model integration, and Modal deployment setup. | Developing the website from Figma design: Creating interactions, visual effects, UI&UX refinement, and Vercel deployment. |
+| Built the Rolex classification model, web-scraping pipeline, recognition pipeline, backend API, model integration, and Modal deployment setup. | Developing the website from [Figma design](https://www.figma.com/design/JvzpwAEPhSpTFqzpf72Ezh/Rolex_Recog_UI?node-id=0-1&t=oeYxbgn8zixFBz3F-0): Creating interactions, visual effects, UI&UX refinement, and Vercel deployment. |
 | GitHub: [@AlexDaPiggie](https://github.com/AlexDaPiggie)<br>LinkedIn: [Hoai Phong Nguyen](https://www.linkedin.com/in/hoai-phong-nguyen-9367a4384/?isSelfProfile=true) | GitHub: [@hertzy-da-poet](https://github.com/hertzy-da-poet)<br>LinkedIn: [Huy Phan](https://linkedin.com/in/huy-linkedin) |
 
 
