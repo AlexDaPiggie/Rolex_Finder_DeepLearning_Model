@@ -49,15 +49,6 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 5. **Variant Matching (`CLIP ViT-L/14`)** Queries `rolex_variants.json` for predicted family. Evaluates zero-shot image-text similarity accross candidate prompts. Returns the top-3 ranked variants with reference IDs examples.
 
 ---
-## Tech Stack
-| Layer | Technologies |
-|:---|:---|
-| **Computer Vision & Deep Learning** | PyTorch, Torchvision, Grounding DINO (`IDEA-Research/grounding-dino-base`), OpenAI CLIP (`openai/clip-vit-large-patch14`), EfficientNet-B0, OpenCV, Pillow, NumPy |
-| **Backend API** | FastAPI, Uvicorn, Python 3.11 |
-| **Cloud & Deployment** | Modal (Serverless NVIDIA L4 GPU, build-time cache pre-baking), Docker, Vercel |
-| **Frontend** | React, Vite, `react-dropzone`, Custom CSS |
-
----
 ## Quick Start (To run locally)
 ### Prerequisites
 - Python 3.11+
@@ -99,64 +90,6 @@ npm run dev
 ```
 
 - UI URL: `http://localhost:5173`
-
----
-
-## API Reference
-
-### `POST /predict`
-Upload watch image via `multipart/form-data`.
-
-**cURL:**
-```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "accept: application/json" \
-  -F "file=@my_watch.jpg"
-```
-
-**Response Payload:**
-```json
-{
-  "predicted_class": "submariner",
-  "confidence": 0.9421,
-  "probabilities": {
-    "submariner": 0.9421,
-    "sea_dweller": 0.0385,
-    "gmt_master": 0.0112,
-    "daytona": 0.0034
-  },
-  "variant_status": "matched_known_variant",
-  "variant_note": "The top result is the strongest match among known catalog variants",
-  "variant_candidates": [
-    {
-      "id": "submariner_date_green_bezel",
-      "display_name": "Submariner Date 'Kermit / Starbucks' (Green Bezel, Black Dial)",
-      "score": 0.8142,
-      "reference_examples": ["16610LV", "126610LV"]
-    },
-    {
-      "id": "submariner_date_black",
-      "display_name": "Submariner Date (Black Bezel, Black Dial)",
-      "score": 0.1205,
-      "reference_examples": ["116610LN", "126610LN"]
-    }
-  ],
-  "model_name": "Rolex Submariner",
-  "crop_info": {
-    "crop_used": true,
-    "score": 0.88,
-    "alignment": {
-      "alignment_applied": true,
-      "rotation_degrees": -14.2
-    },
-    "dial_crop": {
-      "dial_crop_used": true
-    }
-  }
-}
-```
-
-*Fallback: If no watch is detected, returns `"predicted_class": "No Watch Detected"` and `confidence: 0.0`.*
 
 ---
 
