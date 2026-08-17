@@ -1,10 +1,9 @@
 # [Rolex Finder(Click to see the website)](https://rolex-finder.vercel.app)
 An end-to-end pipeline that identifies Rolex watches for raw user upload of images. The pipeline can detect the specific variant with reference ID of the Rolex model using a combination of Deep Learning + Classical Computer Vision + Zero-Shot Foundation Model.
 
-This project stems from my love for watches, hence my aspiration of building a ML pipeline to detect Rolex elegant timepieces. However, this project couldn't have such marvelous UI & UX design without the help of my friend, Huy Phan.
+This project stems from my love for watches, hence my aspiration of building a ML pipeline to detect Rolex elegant timepieces. 
 
-## Acknowledgement
-Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.github.io/Hugo-Portfolio), for bringing the design of this project to life. Hertzy implemented the entire front end and crafted the visual effects that shape the user experience.
+Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.github.io/Hugo-Portfolio), for bringing the web interface into life. Hertzy implemented the entire front end and crafted the visual effects that shape the user experience.
 
 ## Authors
 | **Phong Nguyen (Alex)** | **Huy Phan (Hertzy)** |
