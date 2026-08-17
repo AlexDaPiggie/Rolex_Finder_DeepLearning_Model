@@ -40,7 +40,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 
 
 ## Architecture Pipeline
-![Architecture Pipeline](front_end/public/images/Workflow.png)
+![Architecture Pipeline](front_end/public/images/Workflow.drawio.png)
 
 
 1. **Detection (`Grounding Dino`)**: Queries prompt `"watch. wristwatch."` to get bounding box and `PADDING_RATIO = 0.12` to collect the details of the dial in the bounding box.
