@@ -228,6 +228,12 @@
 
     "gmt_master": [
         {
+            "id": "gmt_fat_lady",
+            "display_name": "Rolex GMT-Master II Fat Lady / Coke",
+            "reference_examples": ["16760", "16710"],
+            "clip_text": "Rolex GMT-Master Fat Lady Coke, two-tone red and black 24-hour bezel, red bezel section around numbers 6 8 10 12 14 16 18, black bezel section around numbers 20 22 2 4, black dial, date cyclops at 3 o'clock"
+        },
+        {
             "id": "gmt_pepsi",
             "display_name": "Rolex GMT-Master Pepsi",
             "reference_examples": ["1675", "16700", "16710", "126710BLRO"],
