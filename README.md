@@ -33,7 +33,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 - **Contour Dial Isolation**: Filters the 78% center (78% of the width & height), scores contour roundess, aspect & fill ratio, and center distance to crop the dial face.
 - **Hierarchical Classification**:
     - **Stage 1**: Fine-tuned **EfficientNet-B0** classifies watch into 15 Rolex families (models), including Submariner, Daytona, Datejust, GMT-Master,... (See child-folders in ./data)
-    - **Stage 2**: Zero-shot CLIP (openai/clip-vit-large-patch14) ranks specific reference variants (dial color, bezel type, material,...)
+    - **Stage 2**: Zero-shot CLIP (openai/clip-vit-base-patch16) ranks specific reference variants (dial color, bezel type, material,...)
 - **Direct Reference Links**: Generates one-click Google Images queries for the predicted reference IDs (e.g. `116610LN`, `126610LV`).
 - **Serverless Cloud API**: Hosted on Modal (NVIDIA L4 GPU) with pre-baked Hugging Face cache layers and auto scale-down to disconnect when not in use (scaledown_windows = 180s).
 
@@ -46,7 +46,7 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 2. **Alignment (`OpenCV + PCA`)**: Masks center dial, extracts bracelet edge pixels via Canny edge detector, computes primary axis with PCA. Rotates iamge if angle offset > 12 deg.
 3. **Dial Extractoin (`Contour Scoring`)**: Searches center 78% bounding box (78% of width & height). Scores contours based on roundness, area ratio, center distance, and fill ratio. Crop dial with 40% padding (to preserve watch's details, avoid cutting watch, mimic train data) 
 4. **Family Classification (`EfficientNet-B0`)**: Runs Softmax over 15 classes, outputs probability distribution and top predicted class.
-5. **Variant Matching (`CLIP ViT-L/14`)** Queries `rolex_variants.json` for predicted family. Evaluates zero-shot image-text similarity accross candidate prompts. Returns the top-3 ranked variants with reference IDs examples.
+5. **Variant Matching (`CLIP ViT-B/16`)** Queries `rolex_variants.json` for predicted family. Evaluates zero-shot image-text similarity accross candidate prompts. Returns the top-3 ranked variants with reference IDs examples.
 
 ---
 ## Quick Start (To run locally)
@@ -97,7 +97,7 @@ npm run dev
 
 `modal_app.py` configures serverless GPU execution:
 
-- **Build-Time Model Pre-baking**: Hugging Face models (`grounding-dino-base`, `clip-vit-large-patch14`) are downloaded during container build via `.run_function()`, eliminating cold-start download latency.
+- **Build-Time Model Pre-baking**: Hugging Face models (`grounding-dino-base`, `clip-vit-base-patch16`) are downloaded during container build via `.run_function()`, eliminating cold-start download latency.
 - **Auto Scale-Down**: Shuts down GPU after 3 minutes idle (`scaledown_window = 180s`, `min_containers = 0`).
 
 ```bash

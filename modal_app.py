@@ -18,7 +18,7 @@ def download_huggingface_models ():
 
     token = os.environ["HF_TOKEN"]
     detector_id = "IDEA-Research/grounding-dino-base"
-    clip_id = "openai/clip-vit-large-patch14"
+    clip_id = "openai/clip-vit-base-patch16"
     AutoProcessor.from_pretrained(detector_id, token = token)
     AutoModelForZeroShotObjectDetection.from_pretrained(
         detector_id,

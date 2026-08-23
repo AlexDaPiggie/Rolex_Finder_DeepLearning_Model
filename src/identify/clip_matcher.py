@@ -1,13 +1,14 @@
+import os
+import torch
 from PIL import Image
 from transformers import pipeline
 from src.inference.device import resolve_device
-import os
 
 '''
 This file implement the logic of the zero-shot clip model. This comes in action after the deeplearning model has predicted the Rolex model. It checks the model variants in the file rolex_variants.json to tell which specific variant that model is.
 '''
 
-MODEL_NAME = 'openai/clip-vit-large-patch14'
+MODEL_NAME = 'openai/clip-vit-base-patch16'
 _detector = None
 
 def get_detector(): 
@@ -17,11 +18,13 @@ def get_detector():
     global _detector
     if _detector is None: 
         device = resolve_device()
+        is_cuda = device.type == "cuda"
         _detector = pipeline (
             task = 'zero-shot-image-classification',
             model = MODEL_NAME,
             token = os.getenv("HF_TOKEN"),
-            device = 0 if device.type == "cuda" else -1,
+            device = 0 if is_cuda else -1,
+            torch_dtype = torch.float16 if is_cuda else torch.float32,
         )
     return _detector
 

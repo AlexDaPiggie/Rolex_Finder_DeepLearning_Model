@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./components/UI/NavBar";
 import Home from "./pages/Home";
 import Authors from "./pages/Authors";
 
+const HEALTH_URL = "https://alexdapiggie--rolex-watch-recognizer-rolexwatchapi-web.modal.run/health";
+
 function App() {
   const [page, setPage] = useState("home");
+
+  useEffect(() => {
+    // Ping backend to wake up / warm container on initial page load
+    fetch(HEALTH_URL, { method: "GET" }).catch(() => {});
+  }, []);
 
   return (
     <>
