@@ -38,7 +38,6 @@ Special thanks to my friend [Huy Phan, a.k.a. Hertzy](https://hertzy-da-poet.git
 - **Serverless Cloud API**: Hosted on Modal (NVIDIA L4 GPU) with pre-baked Hugging Face cache layers and auto scale-down to disconnect when not in use (scaledown_windows = 180s).
  
 
-
 ## Architecture Pipeline
 ![Architecture Pipeline](front_end/public/images/Workflow.drawio.png)
 
